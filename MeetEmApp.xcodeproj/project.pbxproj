@@ -9,16 +9,23 @@
 /* Begin PBXBuildFile section */
 		532BC934379E692CB2886D8A /* Pods_MeetEmApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7433663AA77BF0E799EE61F8 /* Pods_MeetEmApp.framework */; };
 		847BD02722A941480000709B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 847BD02622A941480000709B /* GoogleService-Info.plist */; };
+		847BD02B22AA45FB0000709B /* selectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BD02A22AA45FB0000709B /* selectViewController.swift */; };
 		84E55E4D2295819E00BD6073 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E55E4C2295819E00BD6073 /* AppDelegate.swift */; };
 		84E55E4F2295819E00BD6073 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E55E4E2295819E00BD6073 /* ViewController.swift */; };
 		84E55E522295819E00BD6073 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E55E502295819E00BD6073 /* Main.storyboard */; };
 		84E55E542295819F00BD6073 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84E55E532295819F00BD6073 /* Assets.xcassets */; };
 		84E55E572295819F00BD6073 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84E55E552295819F00BD6073 /* LaunchScreen.storyboard */; };
+		84E778EF22AC042A002B51E7 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E778EE22AC042A002B51E7 /* WelcomeViewController.swift */; };
+		84E778F122AC0470002B51E7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E778F022AC0470002B51E7 /* LoginViewController.swift */; };
+		84E778F322AC0494002B51E7 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E778F222AC0494002B51E7 /* RegisterViewController.swift */; };
+		84E778F722AC2252002B51E7 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E778F622AC2252002B51E7 /* MainTabBarController.swift */; };
+		84E778F922AC2E2A002B51E7 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E778F822AC2E2A002B51E7 /* SettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7433663AA77BF0E799EE61F8 /* Pods_MeetEmApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetEmApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		847BD02622A941480000709B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		847BD02A22AA45FB0000709B /* selectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectViewController.swift; sourceTree = "<group>"; };
 		84E55E492295819E00BD6073 /* MeetEmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetEmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84E55E4C2295819E00BD6073 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84E55E4E2295819E00BD6073 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -26,6 +33,11 @@
 		84E55E532295819F00BD6073 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84E55E562295819F00BD6073 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84E55E582295819F00BD6073 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84E778EE22AC042A002B51E7 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		84E778F022AC0470002B51E7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		84E778F222AC0494002B51E7 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		84E778F622AC2252002B51E7 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		84E778F822AC2E2A002B51E7 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		A44AC70C77A7BD2E6991ED81 /* Pods-MeetEmApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetEmApp.release.xcconfig"; path = "Target Support Files/Pods-MeetEmApp/Pods-MeetEmApp.release.xcconfig"; sourceTree = "<group>"; };
 		B2EB5E9FF4618C4F0D2A5838 /* Pods-MeetEmApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetEmApp.debug.xcconfig"; path = "Target Support Files/Pods-MeetEmApp/Pods-MeetEmApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,10 +95,16 @@
 				84E55E4C2295819E00BD6073 /* AppDelegate.swift */,
 				84E55E4E2295819E00BD6073 /* ViewController.swift */,
 				84E55E502295819E00BD6073 /* Main.storyboard */,
+				84E778F822AC2E2A002B51E7 /* SettingViewController.swift */,
+				84E778F622AC2252002B51E7 /* MainTabBarController.swift */,
+				84E778F222AC0494002B51E7 /* RegisterViewController.swift */,
+				84E778F022AC0470002B51E7 /* LoginViewController.swift */,
+				84E778EE22AC042A002B51E7 /* WelcomeViewController.swift */,
 				84E55E532295819F00BD6073 /* Assets.xcassets */,
 				84E55E552295819F00BD6073 /* LaunchScreen.storyboard */,
 				84E55E582295819F00BD6073 /* Info.plist */,
 				847BD02622A941480000709B /* GoogleService-Info.plist */,
+				847BD02A22AA45FB0000709B /* selectViewController.swift */,
 			);
 			path = MeetEmApp;
 			sourceTree = "<group>";
@@ -244,7 +262,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E55E4F2295819E00BD6073 /* ViewController.swift in Sources */,
+				84E778EF22AC042A002B51E7 /* WelcomeViewController.swift in Sources */,
 				84E55E4D2295819E00BD6073 /* AppDelegate.swift in Sources */,
+				84E778F922AC2E2A002B51E7 /* SettingViewController.swift in Sources */,
+				84E778F722AC2252002B51E7 /* MainTabBarController.swift in Sources */,
+				84E778F322AC0494002B51E7 /* RegisterViewController.swift in Sources */,
+				84E778F122AC0470002B51E7 /* LoginViewController.swift in Sources */,
+				847BD02B22AA45FB0000709B /* selectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

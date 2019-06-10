@@ -34,9 +34,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         
         
-        if CLLocationManager.locationServicesEnabled() {
+        if CLLocationManager.locationServicesEnabled() && Auth.auth().currentUser != nil {
             locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters // You can change the locaiton accuary here.
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest // You can change the locaiton accuary here.
             locationManager.startUpdatingLocation()
         }
         
@@ -52,12 +52,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func addLocation(position: CLLocationCoordinate2D) {
-        let myDatabase = Database.database().reference().child("locations")
+        var userDB = ""
+        if let userEmail = Auth.auth().currentUser?.email {
+            
+            let newString = userEmail.replacingOccurrences(of: ".", with: "-")
+             userDB = String("loc_\(newString)")
+        }
+       
+       // print(userDB)
+        
+        let myDatabase = Database.database().reference().child(userDB)
         
         
-        let record = ["user_id": "users id here",
+        let record = ["user_email": Auth.auth().currentUser?.email,
                       "latitude": "\(position.latitude)",
             "longitude": "\(position.longitude)",
+            "device_udid": UIDevice.current.identifierForVendor!.uuidString,
+            "device_name": UIDevice.current.name,
             "timestamp": "\(Date())"
             
         ]
@@ -67,6 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        if Auth.auth().currentUser != nil {
         if let location = locations.first {
             print(location.coordinate)
             show_marker(position: location.coordinate)
@@ -79,6 +91,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
         }
     }
+    }
     
     func viewCenter (pos: CLLocationCoordinate2D){
         let camera = GMSCameraPosition.camera(withLatitude: pos.latitude, longitude: pos.longitude , zoom: 16.0)
@@ -87,6 +100,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func show_marker(position: CLLocationCoordinate2D)  {
+        
+        if Auth.auth().currentUser != nil {
+            
         let marker = GMSMarker()
         marker.position = position
          addLocation(position: position)
@@ -96,8 +112,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //marker.title = "Addis"
         //marker.snippet = "Capital of Addis"
         marker.map = google_map
+        }
     }
-    
 }
 extension ViewController : GMSMapViewDelegate {
     
