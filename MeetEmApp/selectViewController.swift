@@ -30,6 +30,10 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
          pickedPhone = pickerData[row] as String
     }
+    // Add Icon
+//    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> UIImage? {
+//        return UIImage(named: "iphone")
+//    }
     
     @IBOutlet weak var picker: UIPickerView!
     
@@ -61,6 +65,12 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
         }
     }
     
+    
+    @IBOutlet weak var deviceLable: UILabel!
+    
+    
+    @IBAction func devicePressed(_ sender: Any) {
+    }
     
     @IBAction func centerPressed(_ sender: Any) {
         if lastLocation != nil {
@@ -104,7 +114,8 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
        picker.dataSource = self
         
       // pickerData.append("\(UIDevice.current.name) This Device")
-        pickerData.append(UIDevice.current.name)
+        pickerData.append("\(UIDevice.current.name) - This Device")
+        deviceLable.text = ""
         
        retriveLocations()
         
@@ -116,6 +127,8 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
         let marker = GMSMarker()
         marker.position = position
         //marker.title = "User name"
+        marker.title = Auth.auth().currentUser?.email
+        // marker.icon = UIImage(contentsOfFile: "iphone")
         marker.map = google_maps
     }
     
@@ -152,12 +165,12 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
             let snapshotValue = snapshot.value as! Dictionary<String,String>
             let latitude = Double(snapshotValue["latitude"]!)
             let longitude = Double(snapshotValue["longitude"]!)
-            let deviceName = String(snapshotValue["device_name"] ?? "unknown")
+            let deviceName = String(snapshotValue["device_name"] ?? "unknown") // Unknown returned when some device names fail to return from db
             
             
-//            print(deviceName)
-            
-           if !self.pickerData.contains(deviceName) && deviceName != "unknown" { //}&& !(UIDevice.current.name == deviceName) {
+
+            // check if selected device existes in Picker or device is unknown and make sure its not current device selectd(to avoide extension THIS Device)
+           if (!self.pickerData.contains(deviceName) && deviceName != "unknown") && !(UIDevice.current.name == deviceName) {
                 self.pickerData.append(deviceName)
             self.picker.reloadAllComponents()
 //
@@ -172,24 +185,42 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
             
             self.lastSeenLocations.updateValue(lastKnownPosition, forKey: deviceName)
             
+            // Updating lable according to the selected device
+            
             if self.pickedPhone != "All" {
-            
             self.updateLastLocation(deviceName: self.pickedPhone)
+                self.deviceLable.text = "Tracking: \(self.pickedPhone)"
+            }else if self.pickedPhone == "All" {
+                // Hide lable when all is selected
+                self.deviceLable.text = ""
             }
-                
-//
-//
-              //  print("___________")
-//           print(self.pickedPhone)
-//            print("____lastKnownPosition_______")
-//            print(lastKnownPosition)
-//            print("___________")
-//            print(self.lastSeenLocations)
-//            print("___________")
-//
             
             
-            if deviceName == self.pickedPhone {
+           
+            // Get the coordinates for marker
+            
+            var plotLocation :CLLocationCoordinate2D = self.google_maps.camera.target
+            
+            plotLocation.latitude = latitude!
+            
+            plotLocation.longitude = longitude!
+            
+            self.lastLocation = plotLocation
+           
+            
+             
+            
+            
+            
+            
+            //set marker on map for current location out of the DB
+            self.show_marker(position: plotLocation)
+        
+            
+            
+            // adjusting the camera to follow the selected device
+            
+            if deviceName == self.pickedPhone || self.pickedPhone.hasSuffix("This Device") {
                 
                 var selectedDeviceLocation :CLLocationCoordinate2D = self.google_maps.camera.target
                 
@@ -198,35 +229,19 @@ class selectViewController: UIViewController, CLLocationManagerDelegate,UIPicker
                 
                 self.adjustCamera(position: selectedDeviceLocation)
                 
-                self.lastLocation = selectedDeviceLocation
                 
-                self.show_marker(position: selectedDeviceLocation)
+            }  else {
+                // Initiall loading view set here
                 
-            } else if self.pickedPhone == "All" {
-            
-                        
-            var plotLocation :CLLocationCoordinate2D = self.google_maps.camera.target
-            
-            plotLocation.latitude = latitude!
-            
-            plotLocation.longitude = longitude!
-            
-            self.lastLocation = plotLocation
-            
-           // print("latitude from DB is \(latitude) and longitude is \(longitude)")
-            
-             
-            
-            
-            if self.initial == 0 || self.follow == true {
+                if self.initial == 0 || self.follow == true {
                 self.adjustCamera(position: plotLocation)
                 self.initial += 1
-            
-                self.show_marker(position: plotLocation)
-            
+                
+                
+                
             }
+                
             }
-            //}
             
             
         }

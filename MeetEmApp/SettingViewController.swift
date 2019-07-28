@@ -12,9 +12,12 @@ import SVProgressHUD
 
 class SettingViewController: UIViewController {
     
+    @IBOutlet weak var userLable: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userLable.text = Auth.auth().currentUser!.email
         // Do any additional setup after loading the view.
     }
 

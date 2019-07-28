@@ -109,7 +109,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         //print("\(position.latitude)")
         
-        //marker.title = "Addis"
+        marker.title = Auth.auth().currentUser?.email
         //marker.snippet = "Capital of Addis"
         marker.map = google_map
         }
