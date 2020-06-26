@@ -14,6 +14,10 @@ import Firebase
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
     
+    @IBOutlet weak var distance: UILabel!
+    
+    var distancefrom = CLLocationCoordinate2D()
+    var distanceTo = CLLocationCoordinate2D()
     
     let locationManager = CLLocationManager()
     // var currentLocation = CLLocationCoordinate2D(latitude: 8.989182, longitude: 38.759237)
@@ -87,6 +91,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             // currentLocation = location.coordinate
             if initial == 0 { // set first view based on current loction
                 viewCenter(pos: location.coordinate)
+                distancefrom = location.coordinate
                 initial += 1
             }
         }
@@ -99,20 +104,41 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
+    var previousPosition = CLLocationCoordinate2D()
+    
     func show_marker(position: CLLocationCoordinate2D)  {
         
         if Auth.auth().currentUser != nil {
             
         let marker = GMSMarker()
-        marker.position = position
-         addLocation(position: position)
-        
+       // marker.position = position
+            
+            
+            
+            print("distance between", distanceBetween(from: position, to: previousPosition))
+           // place marker and save location on 300 meter diffrence
+            if distanceBetween(from: position, to: previousPosition) > 300 || previousPosition.latitude == 0.0 {
+                marker.position = position
+                addLocation(position: position)
+                previousPosition = position
+            }
+            
+            
+        distanceTo = position
         //print("\(position.latitude)")
-        
+            let dis = distanceBetween(from: distancefrom, to: distanceTo)/1000
+            let roundUp = String(format:"%.1f", dis)
+            distance.text = "\(roundUp) KM"
         marker.title = Auth.auth().currentUser?.email
         //marker.snippet = "Capital of Addis"
         marker.map = google_map
         }
+    }
+    
+    func distanceBetween(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D) ->  CLLocationDistance {
+    let fromP = CLLocation(latitude: from.latitude, longitude: from.longitude)
+    let toP = CLLocation(latitude: to.latitude, longitude: to.longitude)
+        return fromP.distance(from: toP)
     }
 }
 extension ViewController : GMSMapViewDelegate {
